@@ -7,7 +7,7 @@ ALL_PKGS += $(1)
 
 $(1): .done/$(1)
 
-.done/$(1): $(wildcard $(1)/*) $(2)
+.done/$(1): $(wildcard $(1)/*) $(addprefix .done/,$(2))
 	mkdir -p .done
 	$(CONDA_BUILD) $(1) && touch .done/$(1)
 endef
@@ -29,7 +29,7 @@ $(eval $(call CONDA_TARGET,gmp,))
 
 $(eval $(call CONDA_TARGET,gtest,))
 
-$(eval $(call CONDA_TARGET,yaml-cpp,))
+$(eval $(call CONDA_TARGET,yaml-cpp,gtest))
 
 $(eval $(call CONDA_TARGET,openssl,))
 

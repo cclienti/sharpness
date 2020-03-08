@@ -1,0 +1,22 @@
+{% set version = "1.1.1d" %}
+
+package:
+  name: openssl
+  version: {{ version }}
+
+source:
+  url: https://www.openssl.org/source/openssl-{{ version }}.tar.gz
+  sha256: 1e3a91bc1f9dfce01af26026f856e064eab4c8ee0a8f457b5ae30b40b8b711f2
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+about:
+  home: https://openssl.org
+  license: OpenSSL
+  summary: Cryptography and SSL/TLS Toolkit

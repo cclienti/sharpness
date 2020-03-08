@@ -1,0 +1,25 @@
+{% set version = "1.10.0" %}
+
+package:
+  name: gtest
+  version: {{ version }}
+
+source:
+  url: https://github.com/google/googletest/archive/release-{{ version }}.tar.gz
+  sha256: 9dc9157a9a1551ec7a7e43daea9a694a0bb5fb8bec81235d8a1e6ef64c716dcb
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - python 3
+    - make
+    - cmake
+
+
+about:
+  home: https://github.com/google/googletest
+  license: BSD
+  summary: Google's C++ test framework

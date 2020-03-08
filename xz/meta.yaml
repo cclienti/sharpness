@@ -1,0 +1,23 @@
+{% set version = "5.2.4" %}
+
+package:
+  name: xz
+  version: "{{ version }}"
+
+source:
+  url: https://tukaani.org/xz/xz-{{ version }}.tar.gz
+  sha256: b512f3b726d3b37b6dc4c8570e137b9311e7552e8ccbab4d39d47ce5f4177145
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - make
+
+  run:
+
+about:
+  home: https://tukaani.org/xz
+  license: Public domain/GPL

@@ -1,0 +1,23 @@
+package:
+  name: yaml-cpp
+  version: "0.6.3"
+
+source:
+  git_url: https://github.com/jbeder/yaml-cpp.git
+  git_rev: yaml-cpp-0.6.3
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - make
+    - cmake
+
+  run:
+
+about:
+  home: https://github.com/jbeder/yaml-cpp
+  license: MIT
+  summary: A YAML parser and emitter in C++

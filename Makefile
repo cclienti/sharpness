@@ -1,6 +1,12 @@
-CONDA_BUILD ?= conda-build --use-local
-ALL_PKGS    :=
+SHARPNESS_VERSION  ?= sharpness-1
+CONDA_REPO         ?= /opt/conda-packages/$(SHARPNESS_VERSION)
+CONDA_BUILD        ?= conda-build
+CONDA_BUILD_FLAGS  ?= --use-local
+CONDA_INDEX        ?= conda-index
+CONDA_INDEX_FLAGS  ?= -n $(SHARPNESS_VERSION) --verbose --no-progress
+SHELL              ?= /bin/bash
 
+ALL_PKGS :=
 
 define CONDA_TARGET
 ALL_PKGS += $(1)
@@ -8,8 +14,10 @@ ALL_PKGS += $(1)
 $(1): .done/$(1)
 
 .done/$(1): $(wildcard $(1)/*) $(addprefix .done/,$(2))
-	mkdir -p .done
-	$(CONDA_BUILD) $(1) && touch .done/$(1)
+	$(CONDA_BUILD) $(CONDA_FLAGS) $(1)
+	_helpers/move-package $(CONDA_BUILD) $(CONDA_REPO) $(1)
+	$(CONDA_INDEX) $(CONDA_INDEX_FLAGS) $(CONDA_REPO)
+	mkdir -p .done && touch .done/$(1)
 endef
 
 
@@ -39,6 +47,7 @@ $(eval $(call CONDA_TARGET,openssl,))
 all: $(ALL_PKGS)
 
 clean:
+	conda build purge
 	rm -rf .done
 
 print-pkgs:

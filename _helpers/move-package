@@ -14,4 +14,4 @@ echo "conda_pkg_path=$conda_pkg_path"
 
 mkdir -p $conda_pkg_path
 
-cp $conda_pkg_name $conda_pkg_path
+cp -f $conda_pkg_name $conda_pkg_path

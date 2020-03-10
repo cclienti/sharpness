@@ -14,9 +14,10 @@ ALL_PKGS += $(1)
 $(1): .done/$(1)
 
 .done/$(1): $(wildcard $(1)/*) $(addprefix .done/,$(2))
-	$(CONDA_BUILD) $(CONDA_FLAGS) $(1)
-	_helpers/move-package $(CONDA_BUILD) $(CONDA_REPO) $(1)
-	mkdir -p .done && touch .done/$(1)
+	mkdir -p $(CONDA_REPO)
+	mkdir -p .done
+	$(CONDA_BUILD) $(CONDA_FLAGS) --output-folder $(CONDA_REPO) $(1)
+	touch .done/$(1)
 endef
 
 

@@ -16,7 +16,6 @@ $(1): .done/$(1)
 .done/$(1): $(wildcard $(1)/*) $(addprefix .done/,$(2))
 	$(CONDA_BUILD) $(CONDA_FLAGS) $(1)
 	_helpers/move-package $(CONDA_BUILD) $(CONDA_REPO) $(1)
-	$(CONDA_INDEX) $(CONDA_INDEX_FLAGS) $(CONDA_REPO)
 	mkdir -p .done && touch .done/$(1)
 endef
 
@@ -45,6 +44,9 @@ $(eval $(call CONDA_TARGET,openssl,))
 .PHONY: clean $(ALL_PKGS)
 
 all: $(ALL_PKGS)
+
+index:
+	$(CONDA_INDEX) $(CONDA_INDEX_FLAGS) $(CONDA_REPO)
 
 clean:
 	conda build purge

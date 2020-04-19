@@ -24,4 +24,4 @@ requirements:
 about:
   home: http://site.icu-project.org/
   license: MIT
-  license_file: LICENSE
+  summary: International Components for Unicode

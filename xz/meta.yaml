@@ -21,3 +21,4 @@ requirements:
 about:
   home: https://tukaani.org/xz
   license: Public domain/GPL
+  summary: General-purpose data compression software with a high compression ratio

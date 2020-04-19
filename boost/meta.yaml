@@ -36,3 +36,4 @@ requirements:
 about:
   home: https://github.com/boostorg/boost
   license: BSL-1.0
+  Summary: Set of free portable C++ libraries

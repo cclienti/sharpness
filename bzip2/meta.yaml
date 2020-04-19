@@ -21,3 +21,4 @@ requirements:
 about:
   home: https://www.sourceware.org/bzip2/index.html
   license: BSD
+  summary: File compression program that uses the Burrows–Wheeler algorithm

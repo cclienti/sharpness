@@ -6,6 +6,8 @@
 CONDA_DISTRIB_PATH      ?= $(shell conda info --base)
 # Name of the environment to build packages
 CONDA_BUILD_ENVIRONMENT ?= build-sharpness
+# Conda channel useful to build packages
+CONDA_CHANNELS          ?= -c conda-forge
 
 
 # Conda Destination Repository Base Path
@@ -20,7 +22,7 @@ CONDA_DEST_CHANNEL ?= sharpness-1
 
 CONDA_DEST_REPO = $(CONDA_DEST_PATH)/$(CONDA_DEST_CHANNEL)
 
-CONDA_BUILD     = conda-build --use-local
+CONDA_BUILD     = conda-build $(CONDA_CHANNELS) --use-local
 CONDA_VERIFY    = conda-verify
 CONDA_INDEX     = conda-index --no-progress -n $(CONDA_DEST_CHANNEL)
 
@@ -84,6 +86,8 @@ $(eval $(call CONDA_GENERIC_RULES,gtest,))
 $(eval $(call CONDA_GENERIC_RULES,yaml-cpp,gtest))
 
 $(eval $(call CONDA_GENERIC_RULES,openssl,))
+
+$(eval $(call CONDA_GENERIC_RULES,iwyu,))
 
 
 .PHONY: clean $(ALL_PKGS)

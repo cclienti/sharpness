@@ -1,0 +1,30 @@
+{% set version = "0.13" %}
+
+package:
+  name: iwyu
+  version: {{ version }}
+
+source:
+  url: https://github.com/include-what-you-use/include-what-you-use/archive/{{ version }}.tar.gz
+  sha256sum: a7c91ab7f687dd6ff8cbeec08e83faceb5dfe6c131dc0cfbdc0e58349b0041a7
+
+build:
+  number: 0
+
+requirements:
+  build:
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - make
+    - cmake
+
+  host:
+    - clangdev =9
+
+  run:
+    - libclang =9
+
+about:
+  home: https://github.com/include-what-you-use
+  license: LLVM Release License
+  summary: A tool for use with clang to analyze includes in C and C++ source files

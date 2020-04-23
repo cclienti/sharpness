@@ -19,10 +19,12 @@ requirements:
     - cmake
 
   host:
-    - clangdev =9
+    - clangdev =9.0.1
+    - llvmdev =9.0.1
 
   run:
-    - libclang =9
+    - clang =9.0.1
+    - libllvm9 =9.0.1
 
 about:
   home: https://github.com/include-what-you-use

@@ -14,7 +14,8 @@ CONDA_CHANNELS          ?= -c conda-forge
 CONDA_DEST_PATH    ?= /opt/conda-packages
 # Conda Destination Channel within the Base Path
 CONDA_DEST_CHANNEL ?= sharpness-1
-
+# Python verion
+CONDA_PYTHON_VERSION ?= 3.7
 
 ##################################################################
 # Local variables
@@ -96,7 +97,7 @@ env:
 	mkdir -p $(CONDA_DEST_REPO)
 	set -e; \
 	  . $(CONDA_DISTRIB_PATH)/etc/profile.d/conda.sh; \
-	  conda create -y -n $(CONDA_BUILD_ENVIRONMENT) conda-build conda-verify
+	  conda create -y -n $(CONDA_BUILD_ENVIRONMENT) python=$(CONDA_PYTHON_VERSION) conda-build conda-verify
 
 package: $(addprefix .done/,$(ALL_PKGS))
 

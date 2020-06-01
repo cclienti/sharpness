@@ -13,7 +13,7 @@ LINKFLAGS="${LINKFLAGS} -L${LIBRARY_PATH}"
 
 cat <<EOF > ${SRC_DIR}/tools/build/src/user-config.jam
 using ${TOOLSET} : : ${CXX} ;
-using python : ${PYVER} : ${PREFIX}/bin/python${PYVER} : ${PREFIX}/include/python${PYVER}m : ${PREFIX}/lib ;
+using python : ${PYVER} : ${PREFIX}/bin/python${PYVER} : ${PREFIX}/include/python${PYVER} : ${PREFIX}/lib ;
 EOF
 
 ./bootstrap.sh \

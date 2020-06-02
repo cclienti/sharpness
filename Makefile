@@ -16,6 +16,8 @@ CONDA_DEST_PATH    ?= /opt/conda-packages
 CONDA_DEST_CHANNEL ?= sharpness-1
 # Python verion
 CONDA_PYTHON_VERSION ?= 3.7
+# Python verion
+CONDA_NUMPY_VERSION ?= 1.17
 
 ##################################################################
 # Local variables
@@ -23,7 +25,9 @@ CONDA_PYTHON_VERSION ?= 3.7
 
 CONDA_DEST_REPO = $(CONDA_DEST_PATH)/$(CONDA_DEST_CHANNEL)
 
-CONDA_BUILD     = conda-build $(CONDA_CHANNELS) --use-local
+CONDA_BUILD     = conda-build --python $(CONDA_PYTHON_VERSION) \
+			      --numpy $(CONDA_NUMPY_VERSION) \
+                              $(CONDA_CHANNELS) --use-local
 CONDA_VERIFY    = conda-verify
 CONDA_INDEX     = conda-index --no-progress -n $(CONDA_DEST_CHANNEL)
 
@@ -57,7 +61,8 @@ $(1): .done/$(1) .verified/$(1)
 .verified/$(1):
 	set -e; \
 	  . $(CONDA_DISTRIB_PATH)/etc/profile.d/conda.sh; \
-	  conda activate $(CONDA_BUILD_ENVIRONMENT); $(CONDA_VERIFY) `$(MAKE) -s .name/$(1)`
+	  conda activate $(CONDA_BUILD_ENVIRONMENT); \
+	  $(CONDA_VERIFY) `$(MAKE) -s .name/$(1)`
 	mkdir -p .verified
 	touch .verified/$(1)
 
@@ -97,7 +102,10 @@ env:
 	mkdir -p $(CONDA_DEST_REPO)
 	set -e; \
 	  . $(CONDA_DISTRIB_PATH)/etc/profile.d/conda.sh; \
-	  conda create -y -n $(CONDA_BUILD_ENVIRONMENT) python=$(CONDA_PYTHON_VERSION) conda-build conda-verify
+	  conda create -y -n $(CONDA_BUILD_ENVIRONMENT) \
+	      python=$(CONDA_PYTHON_VERSION) \
+              numpy=$(CONDA_NUMPY_VERSION) \
+              conda-build conda-verify
 
 package: $(addprefix .done/,$(ALL_PKGS))
 
